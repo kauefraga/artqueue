@@ -9,5 +9,5 @@ export function ThemeToggle() {
 
       {theme === 'light' ? 'Modo escuro' : 'Modo claro'}
     </button>
-  )
+  );
 }
