@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import { CommissionsContainer } from '../components/commissions/commissions-container';
 import { CommissionsList } from '../components/commissions/commissions-list';
 import { CommissionsReport } from '../components/commissions/commissions-report';
@@ -7,8 +8,8 @@ import { Header } from '../layout/header';
 import type { Commission } from '../schemas/commission';
 
 function generateMetrics(commissions: Commission[]) {
-  const pendingCommissions = commissions.filter(c => c.stage !== 'finalizada').length;
-  const completedCommissions = commissions.filter(c => c.stage === 'finalizada').length;
+  const pendingCommissions = commissions.filter(c => c.stage !== 'finished').length;
+  const completedCommissions = commissions.filter(c => c.stage === 'finished').length;
   let income = 0;
   for (const c of commissions) {
     income += c.price;
@@ -23,14 +24,16 @@ function generateMetrics(commissions: Commission[]) {
   return metrics;
 }
 
-export default function Home() {
-  const { commissions, pushCommission, finishCommission } = useCommissions();
+// TODO fix dark theme
+export function HomePage() {
+  const navigate = useNavigate();
+  const { commissions, finishCommission } = useCommissions();
 
   const metrics = generateMetrics(commissions);
-  const pendingCommissions = commissions.filter(c => c.stage !== 'finalizada');
+  const pendingCommissions = commissions.filter(c => c.stage !== 'finished');
 
   const handleAddCommission = () => {
-    pushCommission({ id: commissions.length + 1, name: 'Kauê', price: 13.77, paymentStatus: 'não pagou', createdAt: new Date(), stage: 'esboço' });
+    void navigate('/steps/client');
   };
 
   return (
@@ -47,7 +50,12 @@ export default function Home() {
 
         <CommissionsList commissions={pendingCommissions} finishCommissionHandler={finishCommission} />
 
-        <button onClick={handleAddCommission} className="border-1 rounded-lg w-full p-2 border-b-2 border-e-2 transition-all hover:bg-amber-400 hover:cursor-pointer hover:rounded-none">Adicionar</button>
+        <button
+          onClick={handleAddCommission}
+          className="mt-6 w-full border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all hover:bg-amber-400 hover:cursor-pointer hover:rounded-none"
+        >
+          Adicionar
+        </button>
       </CommissionsContainer>
 
       <Footer />

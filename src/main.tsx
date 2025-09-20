@@ -3,14 +3,21 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import './main.css';
 
-import Home from './pages/home.tsx';
+import { FormContextProvider } from './contexts/form-provider.tsx';
+import { ClientFormPage } from './pages/client-form.tsx';
+import { CommissionFormPage } from './pages/commission-form.tsx';
+import { HomePage } from './pages/home.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <FormContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/steps/client" element={<ClientFormPage />} />
+          <Route path="/steps/commission" element={<CommissionFormPage />} />
+        </Routes>
+      </BrowserRouter>
+    </FormContextProvider>
   </StrictMode>,
 );
