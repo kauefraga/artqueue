@@ -37,7 +37,7 @@ export function useCommissions() {
 
     const updatedCommissions: Commission[] = [
       ...commissions.filter(c => c.id !== id),
-      { ...commission, stage: 'finalizada' },
+      { ...commission, stage: 'finished' },
     ];
 
     setCommissions(updatedCommissions);
