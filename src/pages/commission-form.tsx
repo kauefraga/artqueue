@@ -1,3 +1,4 @@
+import { ArrowLeftIcon } from 'lucide-react';
 import { type FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { CommissionsContainer } from '../components/commissions/commissions-container';
@@ -110,18 +111,19 @@ export function CommissionFormPage() {
             </div>
           </main>
 
-          <div className="flex justify-between">
+          <div className="flex gap-6 justify-between">
             <button
               type="reset"
               onClick={onBackButton}
-              className="border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all hover:bg-black/20 hover:cursor-pointer hover:rounded-none"
+              className="flex gap-2 border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all hover:bg-black/20 hover:cursor-pointer hover:rounded-none"
             >
+              <ArrowLeftIcon />
               Voltar
             </button>
 
             <button
               onClick={onSubmitButton}
-              className="border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all bg-amber-400 hover:cursor-pointer hover:rounded-none"
+              className="w-full border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all bg-amber-400 hover:cursor-pointer hover:rounded-none"
             >
               Concluir
             </button>
