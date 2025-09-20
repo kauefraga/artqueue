@@ -12,19 +12,22 @@ export function CommissionItem({ commission, finishCommission }: CommissionItemP
 
   return (
     <li className="flex grow items-center gap-5 border border-b-2 border-e-2 rounded-lg transition-all hover:rounded-none group">
-      <div className="flex flex-col grow px-5">
-        <p>
+      <div className="flex flex-col grow px-5 overflow-hidden">
+        <p className="">
           {commission.name}
           {' '}
           {commission.twitter ? `(@${commission.twitter})` : ''}
         </p>
-        <p className="text-black/50">{commission.stage}</p>
+        <p className="text-black/50 dark:text-white/60">{commission.stage}</p>
       </div>
+
       <p className="p-5">{commission.paymentStatus}</p>
+
       <p className="p-5 group-hover:hidden">
         R$
         {commission.price.toFixed(2).replace('.', ',')}
       </p>
+
       <button onClick={handleFinishCommission} className="hidden group-hover:block cursor-pointer bg-emerald-600 p-5">terminou?</button>
     </li>
   );

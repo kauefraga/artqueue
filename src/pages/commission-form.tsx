@@ -36,14 +36,14 @@ export function CommissionFormPage() {
 
       <CommissionsContainer>
         <form
-          className="p-6 flex flex-col gap-6 bg-white border border-b-4 border-e-4 rounded-3xl overflow-hidden"
+          className="w-full p-6 flex flex-col gap-6 bg-white border border-b-4 border-e-4 rounded-3xl overflow-hidden dark:bg-zinc-800 dark:border-white"
         >
           <div className="-mt-6 self-end -me-6 w-7/12 h-1 bg-amber-400"></div>
 
           <header className="flex flex-col gap-2">
             <h3 className="text-xl font-medium">Nova comissão</h3>
 
-            <p className="text-black/70">Preencha as informações sobre a encomenda.</p>
+            <p className="text-black/70 dark:text-white/70">Preencha as informações sobre a encomenda.</p>
           </header>
 
           <main className="flex flex-col gap-3">
@@ -124,7 +124,7 @@ export function CommissionFormPage() {
 
             <button
               onClick={onSubmitButton}
-              className="w-full border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all bg-amber-400 hover:cursor-pointer hover:rounded-none"
+              className="w-full border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all bg-amber-400 hover:cursor-pointer hover:rounded-none dark:text-black dark:border-white"
             >
               Concluir
             </button>

@@ -5,9 +5,16 @@ export function useTheme() {
     () => (localStorage.getItem('theme') ?? 'light') as 'light' | 'dark',
   );
 
-  const toggleTheme = () => {
-    const html = document.documentElement;
+  const html = document.documentElement;
 
+  if (theme === 'light') {
+    html.classList.remove('dark');
+  }
+  if (theme === 'dark') {
+    html.classList.add('dark');
+  }
+
+  const toggleTheme = () => {
     if (html.classList.contains('dark')) {
       setTheme('light');
       localStorage.setItem('theme', 'light');
