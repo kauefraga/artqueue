@@ -7,6 +7,7 @@ import { FormContextProvider } from './contexts/form-provider.tsx';
 import { ClientFormPage } from './pages/client-form.tsx';
 import { CommissionFormPage } from './pages/commission-form.tsx';
 import { HomePage } from './pages/home.tsx';
+import { NotFoundPage } from './pages/not-found.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<HomePage />} />
           <Route path="/steps/client" element={<ClientFormPage />} />
           <Route path="/steps/commission" element={<CommissionFormPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </FormContextProvider>
