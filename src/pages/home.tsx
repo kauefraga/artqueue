@@ -27,7 +27,12 @@ function generateMetrics(commissions: Commission[]) {
 // TODO fix dark theme
 export function HomePage() {
   const navigate = useNavigate();
-  const { commissions, finishCommission } = useCommissions();
+  const {
+    commissions,
+    finishCommission,
+    cleanPendingCommissions,
+    cleanFinishedCommissions,
+  } = useCommissions();
 
   const metrics = generateMetrics(commissions);
   const pendingCommissions = commissions.filter(c => c.stage !== 'finished');
@@ -38,7 +43,10 @@ export function HomePage() {
 
   return (
     <>
-      <Header />
+      <Header
+        onCleanPendingCommissions={cleanPendingCommissions}
+        onCleanFinishedCommissions={cleanFinishedCommissions}
+      />
 
       <CommissionsContainer>
         <div className="flex flex-col gap-1 text-center">

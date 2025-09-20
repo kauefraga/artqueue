@@ -5,10 +5,11 @@ import { CommissionsContainer } from '../components/commissions/commissions-cont
 import { useFormContext } from '../contexts/form';
 import { useCommissions } from '../hooks/use-commissions';
 import { Footer } from '../layout/footer';
-import { Header } from '../layout/header';
+import { HeaderForm } from '../layout/header-form';
 import { defaultCommission } from '../schemas/commission';
 
 // TODO fix dark theme
+// TODO fix width inconsistency comparing between client form
 export function CommissionFormPage() {
   const navigate = useNavigate();
 
@@ -16,7 +17,7 @@ export function CommissionFormPage() {
   const { commissions, pushCommission } = useCommissions();
 
   const onBackButton = () => {
-    void navigate(-1);
+    void navigate('/steps/client');
   };
   const onSubmitButton = (event: FormEvent) => {
     event.preventDefault();
@@ -31,7 +32,7 @@ export function CommissionFormPage() {
 
   return (
     <>
-      <Header />
+      <HeaderForm />
 
       <CommissionsContainer>
         <form

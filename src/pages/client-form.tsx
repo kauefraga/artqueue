@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { CommissionsContainer } from '../components/commissions/commissions-container';
 import { useFormContext } from '../contexts/form';
 import { Footer } from '../layout/footer';
-import { Header } from '../layout/header';
+import { HeaderForm } from '../layout/header-form';
 
 // TODO fix dark theme
 export function ClientFormPage() {
@@ -13,7 +13,7 @@ export function ClientFormPage() {
   const [commission, setCommission] = useFormContext();
 
   const onBackButton = () => {
-    void navigate(-1);
+    void navigate('/');
   };
   const onNextButton = (event: FormEvent) => {
     event.preventDefault();
@@ -26,7 +26,7 @@ export function ClientFormPage() {
 
   return (
     <>
-      <Header />
+      <HeaderForm />
 
       <CommissionsContainer>
         <form

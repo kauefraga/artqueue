@@ -44,9 +44,25 @@ export function useCommissions() {
     localStorage.setItem('commissions', JSON.stringify(updatedCommissions));
   };
 
+  const cleanPendingCommissions = () => {
+    const updatedCommissions = [...commissions.filter(c => c.stage === 'finished')];
+
+    setCommissions(updatedCommissions);
+    localStorage.setItem('commissions', JSON.stringify(updatedCommissions));
+  };
+
+  const cleanFinishedCommissions = () => {
+    const updatedCommissions = [...commissions.filter(c => c.stage !== 'finished')];
+
+    setCommissions(updatedCommissions);
+    localStorage.setItem('commissions', JSON.stringify(updatedCommissions));
+  };
+
   return {
     commissions,
     pushCommission,
     finishCommission,
+    cleanPendingCommissions,
+    cleanFinishedCommissions,
   };
 }
