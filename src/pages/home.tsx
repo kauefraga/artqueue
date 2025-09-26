@@ -1,30 +1,13 @@
 import { useNavigate } from 'react-router';
 import { CommissionsContainer } from '../components/commissions/commissions-container';
 import { CommissionsList } from '../components/commissions/commissions-list';
+import { CommissionsListHeader } from '../components/commissions/commissions-list-header';
 import { CommissionsReport } from '../components/commissions/commissions-report';
 import { useCommissions } from '../hooks/use-commissions';
+import { useCommissionsMetrics } from '../hooks/use-commissions-metrics';
 import { Footer } from '../layout/footer';
 import { Header } from '../layout/header';
-import type { Commission } from '../schemas/commission';
 
-function generateMetrics(commissions: Commission[]) {
-  const pendingCommissions = commissions.filter(c => c.stage !== 'finished').length;
-  const completedCommissions = commissions.filter(c => c.stage === 'finished').length;
-  let income = 0;
-  for (const c of commissions) {
-    income += c.price;
-  }
-
-  const metrics = [
-    { title: 'Comissões pendentes', value: pendingCommissions.toString() },
-    { title: 'Comissões concluídas', value: completedCommissions.toString() },
-    { title: 'Rendimento', value: `R$${income.toLocaleString('pt-br')}` },
-  ];
-
-  return metrics;
-}
-
-// TODO fix dark theme
 export function HomePage() {
   const navigate = useNavigate();
   const {
@@ -34,7 +17,7 @@ export function HomePage() {
     cleanFinishedCommissions,
   } = useCommissions();
 
-  const metrics = generateMetrics(commissions);
+  const metrics = useCommissionsMetrics(commissions);
   const pendingCommissions = commissions.filter(c => c.stage !== 'finished');
 
   const handleAddCommission = () => {
@@ -49,14 +32,17 @@ export function HomePage() {
       />
 
       <CommissionsContainer>
-        <div className="flex flex-col gap-1 text-center">
-          <p>Fila de comissões</p>
-          <h3 className="text-xl font-medium">Qual é a sua próxima encomenda?</h3>
-        </div>
+        <CommissionsListHeader
+          subtitle="Fila de comissões"
+          title="Qual é a sua próxima encomenda?"
+        />
 
         <CommissionsReport metrics={metrics} />
 
-        <CommissionsList commissions={pendingCommissions} finishCommissionHandler={finishCommission} />
+        <CommissionsList
+          commissions={pendingCommissions}
+          finishCommissionHandler={finishCommission}
+        />
 
         <button
           onClick={handleAddCommission}

@@ -1,4 +1,4 @@
-import type { Commission } from '../../schemas/commission';
+import { paymentStatusToText, stageToText, type Commission } from '../../schemas/commission';
 
 interface CommissionItemProps {
   commission: Commission;
@@ -10,25 +10,33 @@ export function CommissionItem({ commission, finishCommission }: CommissionItemP
     finishCommission(commission.id);
   };
 
+  const paymentStatus = paymentStatusToText[commission.paymentStatus];
+  const stage = stageToText[commission.stage];
+
   return (
-    <li className="flex grow items-center gap-5 border border-b-2 border-e-2 rounded-lg transition-all hover:rounded-none group">
+    <li className="flex grow items-center gap-5 border border-b-2 border-e-2 rounded-lg hover:rounded-none group">
       <div className="flex flex-col grow px-5 overflow-hidden">
-        <p className="">
+        <p>
           {commission.name}
           {' '}
           {commission.twitter ? `(@${commission.twitter})` : ''}
         </p>
-        <p className="text-black/50 dark:text-white/60">{commission.stage}</p>
+        <p className="text-black/50 dark:text-white/60">{stage}</p>
       </div>
 
-      <p className="p-5">{commission.paymentStatus}</p>
+      <p>{paymentStatus}</p>
 
       <p className="p-5 group-hover:hidden">
         R$
-        {commission.price.toFixed(2).replace('.', ',')}
+        {commission.price.toLocaleString('pt-br')}
       </p>
 
-      <button onClick={handleFinishCommission} className="hidden group-hover:block cursor-pointer bg-emerald-600 p-5">terminou?</button>
+      <button
+        onClick={handleFinishCommission}
+        className="hidden group-hover:flex items-center h-full p-5 cursor-pointer bg-[#9ACD32]"
+      >
+        terminou?
+      </button>
     </li>
   );
 }

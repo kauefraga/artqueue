@@ -13,6 +13,20 @@ export const CommissionSchema = z.object({
 
 export type Commission = z.infer<typeof CommissionSchema>;
 
+export const paymentStatusToText: Record<Commission['paymentStatus'], string> = {
+  not_paid: 'Não pago',
+  half_paid: 'Metade paga',
+  paid: 'Pago',
+};
+
+export const stageToText: Record<Commission['stage'], string> = {
+  in_queue: 'Na fila',
+  sketch: 'Esboço',
+  line: 'Line',
+  paint: 'Pintura',
+  finished: 'Finalizada',
+};
+
 export const defaultCommission: Commission = {
   id: 1,
   name: '',

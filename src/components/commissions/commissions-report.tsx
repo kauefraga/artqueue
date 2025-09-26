@@ -1,9 +1,5 @@
+import type { Metric } from '../../hooks/use-commissions-metrics';
 import { CommissionMetric } from './commission-metric';
-
-type Metric = {
-  title: string;
-  value: string;
-};
 
 interface CommissionsReportProps {
   metrics: Metric[];
