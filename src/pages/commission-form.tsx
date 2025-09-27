@@ -5,13 +5,12 @@ import { useFormContext } from '../contexts/form';
 import { useCommissions } from '../hooks/use-commissions';
 import { Footer } from '../layout/footer';
 import { Header } from '../layout/header';
-import { defaultCommission } from '../schemas/commission';
 
 export function CommissionFormPage() {
   const navigate = useNavigate();
 
-  const [commission, setCommission] = useFormContext();
-  const { commissions, pushCommission } = useCommissions();
+  const { commission, setCommission, resetCommission } = useFormContext();
+  const { pushCommission } = useCommissions();
 
   const onBackButton = () => {
     void navigate('/steps/client');
@@ -20,8 +19,8 @@ export function CommissionFormPage() {
     const form = document.getElementById('commission-form') as HTMLFormElement | null;
 
     if (form && form.checkValidity()) {
-      pushCommission({ ...commission, id: commissions.length + 1 });
-      setCommission(defaultCommission);
+      pushCommission(commission);
+      resetCommission();
       void navigate('/');
     }
   };

@@ -1,7 +1,13 @@
 import { createContext, useContext, type Dispatch, type SetStateAction } from 'react';
 import type { Commission } from '../schemas/commission';
 
-export const FormContext = createContext<[Commission, Dispatch<SetStateAction<Commission>>] | null>(null);
+type FormContextValue = {
+  commission: Commission;
+  setCommission: Dispatch<SetStateAction<Commission>>;
+  resetCommission: () => void;
+};
+
+export const FormContext = createContext<FormContextValue | null>(null);
 
 export function useFormContext() {
   const context = useContext(FormContext);

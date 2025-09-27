@@ -5,7 +5,10 @@ export function useCommissions() {
   const [commissions, setCommissions] = useLocalStorage<Commission[]>('commissions', []);
 
   const pushCommission = (commission: Commission) => {
-    const updatedCommissions = [...commissions, commission];
+    const updatedCommissions = [
+      ...commissions,
+      { ...commission, id: commissions.length + 1 },
+    ];
     setCommissions(updatedCommissions);
   };
 

@@ -8,7 +8,7 @@ import { Header } from '../layout/header';
 export function ClientFormPage() {
   const navigate = useNavigate();
 
-  const [commission, setCommission] = useFormContext();
+  const { commission, setCommission } = useFormContext();
 
   const onBackButton = () => {
     void navigate('/');
