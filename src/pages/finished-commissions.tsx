@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router';
 import { CommissionsContainer } from '../components/commissions/commissions-container';
 import { CommissionsList } from '../components/commissions/commissions-list';
 import { CommissionsListHeader } from '../components/commissions/commissions-list-header';
@@ -8,8 +7,7 @@ import { useCommissionsMetrics } from '../hooks/use-commissions-metrics';
 import { Footer } from '../layout/footer';
 import { Header } from '../layout/header';
 
-export function HomePage() {
-  const navigate = useNavigate();
+export function FinishedCommissionsPage() {
   const {
     commissions,
     finishCommission,
@@ -18,11 +16,7 @@ export function HomePage() {
   } = useCommissions();
 
   const metrics = useCommissionsMetrics(commissions);
-  const pendingCommissions = commissions.filter(c => c.stage !== 'finished');
-
-  const handleAddCommission = () => {
-    void navigate('/steps/client');
-  };
+  const finishedCommissions = commissions.filter(c => c.stage === 'finished');
 
   return (
     <>
@@ -33,23 +27,16 @@ export function HomePage() {
 
       <CommissionsContainer>
         <CommissionsListHeader
-          subtitle="Fila de comissões"
-          title="Qual é a sua próxima encomenda?"
+          subtitle="Comissões concluídas"
+          title="Você fez um bom trabalho!"
         />
 
         <CommissionsReport metrics={metrics} />
 
         <CommissionsList
-          commissions={pendingCommissions}
+          commissions={finishedCommissions}
           finishCommissionHandler={finishCommission}
         />
-
-        <button
-          onClick={handleAddCommission}
-          className="mt-6 w-full border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all hover:bg-amber-400 hover:cursor-pointer hover:rounded-none dark:hover:text-black dark:border-white"
-        >
-          Adicionar
-        </button>
       </CommissionsContainer>
 
       <Footer />
