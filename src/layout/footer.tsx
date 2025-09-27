@@ -1,13 +1,25 @@
+import { BugIcon } from 'lucide-react';
+import { FooterLink } from '../components/footer-link';
+
 export function Footer() {
   return (
     <footer className="bg-zinc-950 text-white w-full px-8 py-3">
       <div className="flex justify-between">
-        <a href="https://github.com/kauefraga/artqueue" target="_blank" className="px-5 py-2 border-2 rounded-lg border-zinc-950 hover:border-2 hover:border-amber-400 active:border-dashed">
-          Contribua no GitHub
-        </a>
-        <a href="https://kauefraga.dev/" target="_blank" className="px-5 py-2 border-2 rounded-lg border-zinc-950 hover:border-2 hover:border-amber-400 active:border-dashed">
+        <div className="flex items-center gap-5">
+          <FooterLink href="https://github.com/kauefraga/artqueue/issues?q=is:issue">
+            <BugIcon />
+            Relatar bug
+          </FooterLink>
+
+          {/* <FooterLink href="/guide">
+            <BookOpenIcon />
+            Como usar
+          </FooterLink> */}
+        </div>
+
+        <FooterLink href="https://kauefraga.dev/">
           Feito por Kauê
-        </a>
+        </FooterLink>
       </div>
     </footer>
   );
