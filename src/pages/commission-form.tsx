@@ -5,7 +5,7 @@ import { CommissionsContainer } from '../components/commissions/commissions-cont
 import { useFormContext } from '../contexts/form';
 import { useCommissions } from '../hooks/use-commissions';
 import { Footer } from '../layout/footer';
-import { HeaderForm } from '../layout/header-form';
+import { Header } from '../layout/header';
 import { defaultCommission } from '../schemas/commission';
 
 export function CommissionFormPage() {
@@ -30,7 +30,7 @@ export function CommissionFormPage() {
 
   return (
     <>
-      <HeaderForm />
+      <Header />
 
       <CommissionsContainer>
         <form

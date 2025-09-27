@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { CommissionsContainer } from '../components/commissions/commissions-container';
 import { useFormContext } from '../contexts/form';
 import { Footer } from '../layout/footer';
-import { HeaderForm } from '../layout/header-form';
+import { Header } from '../layout/header';
 
 export function ClientFormPage() {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export function ClientFormPage() {
 
   return (
     <>
-      <HeaderForm />
+      <Header />
 
       <CommissionsContainer>
         <form

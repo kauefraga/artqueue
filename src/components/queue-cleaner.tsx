@@ -3,15 +3,15 @@ import { Trash2 } from 'lucide-react';
 interface QueueCleanerProps {
   /** cleaner should clean pending or finished commissions */
   type: 'pending' | 'finished';
-  onClean: () => void;
+  onClear: () => void;
 }
 
-export function QueueCleaner({ type, onClean }: QueueCleanerProps) {
+export function QueueCleaner({ type, onClear }: QueueCleanerProps) {
   if (type === 'pending') {
     return (
       <button
         title="Remove todas encomendas pendentes"
-        onClick={onClean}
+        onClick={onClear}
         className="flex gap-3 hover:cursor-pointer"
       >
         <Trash2 />
@@ -23,7 +23,7 @@ export function QueueCleaner({ type, onClean }: QueueCleanerProps) {
   return (
     <button
       title="Remove todas encomendas finalizadas"
-      onClick={onClean}
+      onClick={onClear}
       className="flex gap-3 hover:cursor-pointer"
     >
       <Trash2 />

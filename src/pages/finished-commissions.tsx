@@ -2,6 +2,8 @@ import { CommissionsContainer } from '../components/commissions/commissions-cont
 import { CommissionsList } from '../components/commissions/commissions-list';
 import { CommissionsListHeader } from '../components/commissions/commissions-list-header';
 import { CommissionsReport } from '../components/commissions/commissions-report';
+import { FinishedCommissionsActions } from '../components/finished-commissions/actions';
+import { FinishedCommissionsNav } from '../components/finished-commissions/nav';
 import { useCommissions } from '../hooks/use-commissions';
 import { useCommissionsMetrics } from '../hooks/use-commissions-metrics';
 import { Footer } from '../layout/footer';
@@ -11,7 +13,6 @@ export function FinishedCommissionsPage() {
   const {
     commissions,
     finishCommission,
-    clearPendingCommissions,
     clearFinishedCommissions,
   } = useCommissions();
 
@@ -21,8 +22,8 @@ export function FinishedCommissionsPage() {
   return (
     <>
       <Header
-        onCleanPendingCommissions={clearPendingCommissions}
-        onCleanFinishedCommissions={clearFinishedCommissions}
+        nav={<FinishedCommissionsNav />}
+        actions={<FinishedCommissionsActions onClearCommissions={clearFinishedCommissions} />}
       />
 
       <CommissionsContainer>

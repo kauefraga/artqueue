@@ -1,11 +1,11 @@
 import { CommissionsContainer } from '../components/commissions/commissions-container';
 import { Footer } from '../layout/footer';
-import { HeaderForm } from '../layout/header-form';
+import { Header } from '../layout/header';
 
 export function NotFoundPage() {
   return (
     <>
-      <HeaderForm />
+      <Header />
 
       <CommissionsContainer>
         <h3 className="text-xl font-medium">Essa página não existe!</h3>
