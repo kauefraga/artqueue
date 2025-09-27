@@ -1,5 +1,4 @@
 import { ArrowLeftIcon } from 'lucide-react';
-import { type FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { CommissionsContainer } from '../components/commissions/commissions-container';
 import { useFormContext } from '../contexts/form';
@@ -14,13 +13,12 @@ export function ClientFormPage() {
   const onBackButton = () => {
     void navigate('/');
   };
-  const onNextButton = (event: FormEvent) => {
-    event.preventDefault();
+  const onNextButton = () => {
+    const form = document.getElementById('client-form') as HTMLFormElement | null;
 
-    // TODO validate errors
-    // show errors to user
-
-    void navigate('/steps/commission');
+    if (form && form.checkValidity()) {
+      void navigate('/steps/commission');
+    }
   };
 
   return (
@@ -38,13 +36,18 @@ export function ClientFormPage() {
             <p className="text-black/70 dark:text-white/70">Preencha as informações sobre seu cliente.</p>
           </header>
 
-          <form className="px-6 mt-3 mb-6 flex flex-col gap-3">
+          <form
+            id="client-form"
+            onSubmit={(e) => { e.preventDefault(); }}
+            className="px-6 mt-3 mb-6 flex flex-col gap-3"
+          >
             <div className="flex flex-col gap-2">
               <p>Nome do cliente</p>
               <input
                 type="text"
                 name="name"
                 placeholder="João"
+                autoFocus
                 required
                 value={commission.name}
                 onChange={(e) => {

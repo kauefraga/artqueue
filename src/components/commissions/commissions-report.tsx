@@ -7,7 +7,7 @@ interface CommissionsReportProps {
 
 export function CommissionsReport({ metrics }: CommissionsReportProps) {
   return (
-    <div className="w-full flex gap-5 justify-between flex-wrap">
+    <div className="w-full flex gap-3 justify-between flex-wrap">
       {metrics.map(m => (
         <CommissionMetric key={m.title} title={m.title} value={m.value} />
       ))}

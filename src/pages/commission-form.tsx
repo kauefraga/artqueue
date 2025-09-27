@@ -1,5 +1,4 @@
 import { ArrowLeftIcon } from 'lucide-react';
-import { type FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { CommissionsContainer } from '../components/commissions/commissions-container';
 import { useFormContext } from '../contexts/form';
@@ -17,15 +16,14 @@ export function CommissionFormPage() {
   const onBackButton = () => {
     void navigate('/steps/client');
   };
-  const onSubmitButton = (event: FormEvent) => {
-    event.preventDefault();
+  const onSubmitButton = () => {
+    const form = document.getElementById('commission-form') as HTMLFormElement | null;
 
-    // TODO validate errors
-    // show errors to user
-
-    pushCommission({ ...commission, id: commissions.length + 1 });
-    setCommission(defaultCommission);
-    void navigate('/');
+    if (form && form.checkValidity()) {
+      pushCommission({ ...commission, id: commissions.length + 1 });
+      setCommission(defaultCommission);
+      void navigate('/');
+    }
   };
 
   return (
@@ -33,7 +31,7 @@ export function CommissionFormPage() {
       <Header />
 
       <CommissionsContainer>
-        <div className="w-full flex flex-col bg-white border border-b-4 border-e-4 rounded-3xl overflow-hidden dark:bg-zinc-800 dark:border-white">
+        <div className="mb-5 w-full flex flex-col bg-white border border-b-4 border-e-4 rounded-3xl overflow-hidden dark:bg-zinc-800 dark:border-white">
           <div className="w-full h-1 bg-black/10 dark:bg-white/20">
             <div className="w-full h-full bg-amber-400 transition-all duration-300"></div>
           </div>
@@ -43,7 +41,11 @@ export function CommissionFormPage() {
             <p className="text-black/70 dark:text-white/70">Preencha as informações sobre a encomenda.</p>
           </header>
 
-          <form className="px-6 mt-3 mb-6 flex flex-col gap-3">
+          <form
+            id="commission-form"
+            onSubmit={(e) => { e.preventDefault(); }}
+            className="px-6 mt-3 mb-6 flex flex-col gap-3"
+          >
             <div className="flex flex-col gap-2">
               <p>Preço (R$)</p>
               <input
@@ -52,7 +54,9 @@ export function CommissionFormPage() {
                 autoComplete="off"
                 min="0"
                 max="9999999999"
+                step="0.01"
                 placeholder="99,99"
+                autoFocus
                 required
                 value={commission.price || ''}
                 onChange={(e) => {

@@ -42,17 +42,17 @@ export function PendingCommissionsPage() {
 
         <CommissionsReport metrics={metrics} />
 
+        <button
+          onClick={handleAddCommission}
+          className="w-full border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all hover:bg-amber-400 hover:cursor-pointer hover:rounded-none dark:hover:text-black dark:border-white"
+        >
+          Adicionar
+        </button>
+
         <CommissionsList
           commissions={pendingCommissions}
           finishCommissionHandler={finishCommission}
         />
-
-        <button
-          onClick={handleAddCommission}
-          className="mt-6 w-full border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all hover:bg-amber-400 hover:cursor-pointer hover:rounded-none dark:hover:text-black dark:border-white"
-        >
-          Adicionar
-        </button>
       </CommissionsContainer>
 
       <Footer />
