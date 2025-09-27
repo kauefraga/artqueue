@@ -8,8 +8,6 @@ import { Footer } from '../layout/footer';
 import { HeaderForm } from '../layout/header-form';
 import { defaultCommission } from '../schemas/commission';
 
-// TODO fix dark theme
-// TODO fix width inconsistency comparing between client form
 export function CommissionFormPage() {
   const navigate = useNavigate();
 

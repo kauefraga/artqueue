@@ -1,35 +1,12 @@
-import { useState } from 'react';
-import z from 'zod';
-import { CommissionSchema, type Commission } from '../schemas/commission';
-
-const CommissionsSchema = z.array(CommissionSchema);
-
-function parseCommissions(json: string | null) {
-  if (json) {
-    const { success, data, error } = CommissionsSchema.safeParse(JSON.parse(json));
-
-    if (success) {
-      return data;
-    }
-
-    console.error(error);
-  }
-
-  return [];
-}
+import { type Commission } from '../schemas/commission';
+import { useLocalStorage } from './use-localstorage';
 
 export function useCommissions() {
-  const json = localStorage.getItem('commissions');
-
-  const [commissions, setCommissions] = useState(
-    () => parseCommissions(json),
-  );
+  const [commissions, setCommissions] = useLocalStorage<Commission[]>('commissions', []);
 
   const pushCommission = (commission: Commission) => {
     const updatedCommissions = [...commissions, commission];
-
     setCommissions(updatedCommissions);
-    localStorage.setItem('commissions', JSON.stringify(updatedCommissions));
   };
 
   const finishCommission = (id: number) => {
@@ -41,28 +18,25 @@ export function useCommissions() {
     ];
 
     setCommissions(updatedCommissions);
-    localStorage.setItem('commissions', JSON.stringify(updatedCommissions));
   };
 
-  const cleanPendingCommissions = () => {
+  const clearPendingCommissions = () => {
     const updatedCommissions = [...commissions.filter(c => c.stage === 'finished')];
 
     setCommissions(updatedCommissions);
-    localStorage.setItem('commissions', JSON.stringify(updatedCommissions));
   };
 
-  const cleanFinishedCommissions = () => {
+  const clearFinishedCommissions = () => {
     const updatedCommissions = [...commissions.filter(c => c.stage !== 'finished')];
 
     setCommissions(updatedCommissions);
-    localStorage.setItem('commissions', JSON.stringify(updatedCommissions));
   };
 
   return {
     commissions,
     pushCommission,
     finishCommission,
-    cleanPendingCommissions,
-    cleanFinishedCommissions,
+    clearPendingCommissions,
+    clearFinishedCommissions,
   };
 }

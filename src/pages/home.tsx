@@ -13,8 +13,8 @@ export function HomePage() {
   const {
     commissions,
     finishCommission,
-    cleanPendingCommissions,
-    cleanFinishedCommissions,
+    clearPendingCommissions,
+    clearFinishedCommissions,
   } = useCommissions();
 
   const metrics = useCommissionsMetrics(commissions);
@@ -27,8 +27,8 @@ export function HomePage() {
   return (
     <>
       <Header
-        onCleanPendingCommissions={cleanPendingCommissions}
-        onCleanFinishedCommissions={cleanFinishedCommissions}
+        onCleanPendingCommissions={clearPendingCommissions}
+        onCleanFinishedCommissions={clearFinishedCommissions}
       />
 
       <CommissionsContainer>

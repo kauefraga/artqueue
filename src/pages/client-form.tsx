@@ -6,7 +6,6 @@ import { useFormContext } from '../contexts/form';
 import { Footer } from '../layout/footer';
 import { HeaderForm } from '../layout/header-form';
 
-// TODO fix dark theme
 export function ClientFormPage() {
   const navigate = useNavigate();
 
