@@ -50,11 +50,26 @@ export function CommissionFormPage() {
               <input
                 type="number"
                 name="price"
+                autoComplete="off"
+                min="0"
+                max="9999999999"
                 placeholder="99,99"
                 required
-                value={commission.price}
+                value={commission.price || ''}
                 onChange={(e) => {
-                  setCommission({ ...commission, price: Number(e.target.value) });
+                  const price = parseFloat(e.target.value.replace(',', '.'));
+                  const isNonNegativeNumber = !isNaN(price) && price >= 0;
+
+                  if (isNonNegativeNumber) {
+                    setCommission({
+                      ...commission,
+                      price,
+                    });
+                  }
+                }}
+                style={{
+                  WebkitAppearance: 'none',
+                  MozAppearance: 'textfield',
                 }}
                 className="border-1 rounded-lg p-2 border-b-2 border-e-2 transition-all hover:cursor-pointer hover:rounded-none focus:rounded-none focus:outline-none focus:border-blue-700"
               />
